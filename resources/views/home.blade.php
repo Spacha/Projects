@@ -13,7 +13,7 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    <table class="table table-striped">
+                    <table class="table table-striped table-hover">
                         <thead>
                             <tr>
                                 <th>Project name</th>
@@ -25,7 +25,7 @@
                         
                         @forelse ($projects as $project)
                             <tr>
-                                <td>{{ $project->name }}</td>
+                                <td><a href="{{ url('/projects/'. $project->id) }}">{{ $project->name }}</a></td>
                                 <td>{{ $project->created_at }}</td>
                                 <td>{{ $project->updated_at }}</td>
                             </tr>
