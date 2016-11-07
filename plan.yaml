@@ -1,0 +1,19 @@
+Database structure:
+(excluding timestamps)
+
+- Users:
+	- id
+	- username
+	- email
+	- password
+- Projects:
+	- id
+	- name
+	- user_id
+	- public
+	- category_id
+	- description
+
+- Category:
+	- id
+	- name
