@@ -26,12 +26,19 @@ Route::group(['middleware' => 'auth'], function () {
 
 	/* PROJECT */
 
+	// Project front-page
 	Route::get('/', 'ProjectController@index');
 	Route::get('/projects', 'ProjectController@index');
 	
-	Route::get('/projects/view/{id}', 'ProjectController@view');
+	// Modify projects
 	Route::get('/projects/create', 'ProjectController@create');
+
+	// Save project
+	Route::post('/projects/save', 'ProjectController@save');
+
 	Route::get('/projects/edit/{id}', 'ProjectController@edit');
 
-	Route::post('/projects/save', 'ProjectController@save');
+	// View project
+	Route::get('/projects/{id}', 'ProjectController@view');
+
 });
