@@ -12,6 +12,15 @@
 	margin-bottom: 10px;
 }
 
+table.header-info {
+	margin: 10px 30px;
+	width: 100%;
+}
+
+.project-description {
+	color: #777777;
+}
+
 .form-group.required .control-label:after {
 	content: '*';
 }
