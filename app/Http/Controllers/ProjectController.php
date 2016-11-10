@@ -8,6 +8,8 @@ use App\Project;
 use App\User;
 use Auth;
 
+use DB;
+
 class ProjectController extends Controller
 {
 	public function create() {
@@ -29,8 +31,32 @@ class ProjectController extends Controller
 
     public function view($id)
     {
-        $project = Project::find($id);
+        $projectData = Project::find($id);
 
+        // Get category data
+        $categoryData = DB::table('categories')
+            ->where('id', $projectData->category_id)
+            ->first();
+
+        // If category doesn't exist, set empty
+        if (empty($categoryData)) {
+            $categoryName = 'No category';
+        } else {
+            $categoryName = $categoryData->name;
+        }
+
+        // Insert view data to array
+        $project = [
+            'name' => $projectData->name,
+            'url' => $projectData->url,
+            'category' => $categoryName,
+            'started' => prettifyDates($projectData->created_at),
+            'updated' => prettifyDates($projectData->updated_at),
+
+            'description' => $projectData->description,
+        ];
+
+        // Show view
         return view('projects.view', [
             'project' => $project
         ]);
