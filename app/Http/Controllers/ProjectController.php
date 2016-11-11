@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Project;
+use App\Category;
 use App\User;
 use Auth;
 
@@ -13,7 +14,11 @@ use DB;
 class ProjectController extends Controller
 {
 	public function create() {
-		return view('projects.create');
+        $categories = Category::all();
+
+		return view('projects.create', [
+            'categories' => $categories
+        ]);
 	}
 
     public function index()
@@ -38,20 +43,19 @@ class ProjectController extends Controller
             ->where('id', $projectData->category_id)
             ->first();
 
-        // If category doesn't exist, set empty
-        if (empty($categoryData)) {
-            $categoryName = 'No category';
-        } else {
-            $categoryName = $categoryData->name;
+        // If category exists
+        if (!empty($categoryData)) {
+            $category['id'] = $categoryData->id;
+            $category['name'] = $categoryData->name;
         }
 
         // Insert view data to array
         $project = [
             'name' => $projectData->name,
             'url' => $projectData->url,
-            'category' => $categoryName,
-            'started' => prettifyDates($projectData->created_at),
-            'updated' => prettifyDates($projectData->updated_at),
+            'category' => $category,
+            'started' => prettifyDate($projectData->created_at),
+            'updated' => prettifyDate($projectData->updated_at),
 
             'description' => $projectData->description,
         ];

@@ -23,8 +23,13 @@
                                 <label for="category" class="col-sm-3 control-label">Category</label>
                                 <div class="col-sm-9">
                                     <select name="category" class="form-control" id="name">
-                                        <option value="1">General</option>
-                                        <option value="2">Web applications</option>
+
+                                        @forelse ($categories as $category)
+                                            <option value="{{ $category['id'] }}">{{ $category['name'] }}</option>
+                                        @empty
+                                            <option value="0">No category</option>
+                                        @endforelse
+
                                     </select>
                                 </div>
                             </div>
