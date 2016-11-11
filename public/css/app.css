@@ -5776,6 +5776,13 @@ table.header-info {
   margin: 10px 30px;
   width: 100%; }
 
+.projects-header h1 {
+  margin-top: 0px; }
+
+.projects-header .header-btn-container {
+  height: 39px;
+  line-height: 39px; }
+
 .project-description {
   color: #777777; }
 

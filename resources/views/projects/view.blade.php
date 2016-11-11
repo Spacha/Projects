@@ -4,15 +4,29 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-        <div class="page-header">
-            <h1><a href="{{ url('/projects') }}"><i class="fa fa-arrow-circle-o-left"></i></a> Example page header <small>Subtext for header</small></h1>
+        <div class="page-header row projects-header">
+            <div class="col-xs-8">
+                <h1><a href="{{ url('/projects') }}"><i class="fa fa-arrow-circle-o-left"></i></a> {{ $project['name'] }}</h1>
+            </div>
+            <div class="col-xs-4 text-right header-btn-container">
+                <a href="" role="button" class="btn btn-primary"><i class="fa fa-edit"></i> Edit</a>
+            </div>
         </div>
             <div class="panel panel-default row">
                 <div class="panel-body">
                     <div class="col-sm-6">
                         <table class="header-info">
-                            <tr><th>Project url</th><td>{{ $project['url'] }}</td></tr>
-                            <tr><th>Category</th><td>{{ $project['category'] }}</td></tr>
+                            <tr><th>Project url</th><td>{{ strlen($project['url']) ? $project['url'] : 'No url' }}</td></tr>
+                            <tr><th>Category</th>
+                            <td>
+                                @if (!empty($project['category']) && strlen($project['category']['name']))
+
+                                    <a href="{{ url('/categories/'.$project['category']['id']) }}">{{ $project['category']['name'] }}</a>
+                                
+                                @else <i>No category</i>
+
+                                @endif
+                            </td></tr>
                         </table>
                     </div>
                     <div class="col-sm-6">
